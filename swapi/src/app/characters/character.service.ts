@@ -1,11 +1,12 @@
 import { Injectable, OnInit } from '@angular/core';
-import { map } from 'rxjs/operators';
-import { HttpClient } from '@angular/common/http';
+import { map, take, exhaustMap } from 'rxjs/operators';
+import { HttpClient, HttpParams } from '@angular/common/http';
+import { AuthService } from '../auth/auth.service';
 
 @Injectable({ providedIn: 'root' })
 export class CharacterService implements OnInit {
 
-    constructor(private http: HttpClient) { }
+    constructor(private http: HttpClient, private authService: AuthService) { }
 
     ngOnInit() {
         this.fetchCharacters();
@@ -13,30 +14,17 @@ export class CharacterService implements OnInit {
     }
 
     fetchCharacters() {
-        return this.http.get<any>('https://swapi.dev/api/people/?page=1')
-            .pipe(map(resData => {
-                let characters: Array<{
-                    name: string;
-                    height: number;
-                    mass: number;
-                    hair_color: string;
-                    skin_color: string;
-                    eye_color: string;
-                    birth_year: number;
-                    gender: string;
-                    homeworld: string;
-                    films: string[];
-                    species: string[];
-                    vehicles: string[];
-                    starships: string[];
-                    created: Date;
-                    edited: Date;
-                    url: string;
-                    id?: string;
-                }>;
+        return this.authService.user.pipe(
+            take(1),
+            exhaustMap(user => {
+                return this.http.get<any>('https://swapi.dev/api/people/?page=1',
+                {
+                    params: new HttpParams().set('auth', user.token)
+                }
+                );
+            }),
+            map(resData => {
                 console.log(resData.results);
-                characters = resData.results;
-                console.log("Fetch from SWAPI: " + characters[0].birth_year);
                 return resData.results;
             }));
     }
