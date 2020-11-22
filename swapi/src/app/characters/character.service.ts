@@ -14,15 +14,7 @@ export class CharacterService implements OnInit {
     }
 
     fetchCharacters() {
-        return this.authService.user.pipe(
-            take(1),
-            exhaustMap(user => {
-                return this.http.get<any>('https://swapi.dev/api/people/?page=1',
-                {
-                    params: new HttpParams().set('auth', user.token)
-                }
-                );
-            }),
+        return this.http.get<any>('https://swapi.dev/api/people/?page=1').pipe(
             map(resData => {
                 console.log(resData.results);
                 return resData.results;

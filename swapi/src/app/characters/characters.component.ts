@@ -26,9 +26,12 @@ export class CharactersComponent implements OnInit, OnDestroy {
 
   getCharacters() {
     const data: any = this.characterServise.fetchCharacters().subscribe(data => {
-      this.characters=data;
+      this.characters = data;
       console.log("Character[0].NAAAAME:" + this.characters[2].name);
     });
+  }
+  onLogOut() {
+    this.authService.logOut();
   }
 
   ngOnDestroy(): void {
