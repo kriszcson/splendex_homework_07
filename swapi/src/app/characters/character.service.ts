@@ -1,10 +1,8 @@
-import { Component, Injectable, OnInit } from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
 import { map } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
 
-import { Character } from './model/character';
-import { Input } from '@angular/core';
-
+@Injectable({ providedIn: 'root' })
 export class CharacterService implements OnInit {
 
     constructor(private http: HttpClient) { }
@@ -15,7 +13,7 @@ export class CharacterService implements OnInit {
     }
 
     fetchCharacters() {
-        this.http.get('https://swapi.dev/api/people/?page=1')
+        return this.http.get('https://swapi.dev/api/people/?page=1')
             .pipe(map(resData => {
                 const characters = [];
                 for (const key in resData) {
@@ -23,10 +21,7 @@ export class CharacterService implements OnInit {
                         characters.push({ ...resData[key], id: key })
                     }
                 }
-                return characters;
             })
             )
-            .subscribe(characters => {
-            })
     }
 }
