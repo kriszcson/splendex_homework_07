@@ -1,0 +1,40 @@
+$primary-color:#272727;
+$secondary-color: #f1f5dd;
+.container {
+    display: flex;
+    flex-direction: column;
+    background: $primary-color;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0 auto;
+    width: 100%;
+    color: $secondary-color;
+    font-family: 'Anton', sans-serif;
+    .heading {
+        &__text {
+            color: #e7dcdc;
+            font-size: 3rem;
+            margin: 80px;
+        }
+    }
+    input {
+        background-color: #f1f5dd;
+        width: 300px;
+        .password {
+            margin-bottom: 400px;
+        }
+    }
+    .buttons {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        .btn-submit {
+            width: 140px;
+            margin-right: 20px;
+        }
+        .btn {
+            background-color: #e1e9c0;
+        }
+    }
+}
