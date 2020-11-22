@@ -6,6 +6,8 @@ import { CharactersComponent } from './characters/characters.component';
 import { AuthComponent } from './auth/auth.component'; 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { LoadingSpinnerComponent } from './shared/loading-spinner/loading-spinner.component';
+
 
 const appRoutes: Routes = [
   { path: '', component: AuthComponent }
@@ -16,7 +18,8 @@ const appRoutes: Routes = [
   declarations: [
     AppComponent,
     CharactersComponent,
-    AuthComponent
+    AuthComponent,
+    LoadingSpinnerComponent
   ],
   imports: [
     BrowserModule,
