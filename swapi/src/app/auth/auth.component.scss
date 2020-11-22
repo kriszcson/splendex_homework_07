@@ -15,7 +15,7 @@ $secondary-color: #f1f5dd;
         &__text {
             color: #e7dcdc;
             font-size: 3rem;
-            margin: 80px;
+            margin: 40px;
         }
     }
     input {
@@ -36,5 +36,10 @@ $secondary-color: #f1f5dd;
         .btn {
             background-color: #e1e9c0;
         }
+    }
+    .alert-danger {
+        width: 300px;
+        color: $primary-color;
+        margin-top: 0;
     }
 }

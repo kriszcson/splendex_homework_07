@@ -30,9 +30,37 @@ export class CharactersComponent implements OnInit, OnDestroy {
       console.log("Character[0].NAAAAME:" + this.characters[2].name);
     });
   }
+
+  clickSortByMass() {
+    this.characters = this.characters.sort(this.sortByMass);
+  }
+
+  sortByMass(a: Character, b: Character) {
+    if (a.mass > b.mass) {
+      return 1;
+    } if (a.mass < b.mass) {
+      return -1;
+    }
+    return 0;
+  }
+
+  clickSortByHeight() {
+    this.characters = this.characters.sort(this.sortByHeight);
+  }
+
+  sortByHeight(a: Character, b: Character) {
+    if (a.height > b.height) {
+      return 1;
+    } if (a.height < b.height) {
+      return -1;
+    }
+    return 0;
+  }
+
   onLogOut() {
     this.authService.logOut();
   }
+
 
   ngOnDestroy(): void {
     this.userSub.unsubscribe();
