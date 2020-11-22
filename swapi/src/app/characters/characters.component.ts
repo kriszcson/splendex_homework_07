@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy, Injectable } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { AuthService } from '../auth/auth.service';
 import { CharacterService } from './character.service';
+import { Character } from './model/character';
 
 @Component({
   selector: 'app-characters',
@@ -13,7 +14,7 @@ export class CharactersComponent implements OnInit, OnDestroy {
 
   isAuthenticated = false;
   private userSub: Subscription;
-  characters;
+  characters: Character[];
 
   constructor(private characterServise: CharacterService, private authService: AuthService) { }
 
@@ -22,9 +23,14 @@ export class CharactersComponent implements OnInit, OnDestroy {
       this.isAuthenticated = !!user;
     });
   }
+
   getCharacters() {
-    this.characters = this.characterServise.fetchCharacters().subscribe();
-    console.log(this.characters);
+    const data: any = this.characterServise.fetchCharacters().subscribe(data => {
+      console.log("GET DATA: " + data);
+      this.characters=data;
+      console.log("Character[0].NAAAAME:" + this.characters[0].name);
+
+    });
   }
 
   ngOnDestroy(): void {
