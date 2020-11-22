@@ -13,15 +13,12 @@ export class CharacterService implements OnInit {
     }
 
     fetchCharacters() {
-        return this.http.get('https://swapi.dev/api/people/?page=1')
+        return this.http.get<any>('https://swapi.dev/api/people/?page=1')
             .pipe(map(resData => {
-                const characters = [];
-                for (const key in resData) {
-                    if (resData.hasOwnProperty(key)) {
-                        characters.push({ ...resData[key], id: key })
-                    }
-                }
-            })
-            )
+                let characters;
+                characters = resData.results;
+                console.log(characters);
+            }));
     }
 }
+
