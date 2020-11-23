@@ -7,7 +7,7 @@
             <button class="btn__main-btn__logout" (click)="onLogOut()">Logout</button>
             <button class="btn__main-btn__get" (click)="getCharacters()">get Characters</button>
         </div>
-        <div class="btn__sorting-btn" *ngIf="characters.length>0">
+        <div class="btn__sorting-btn" *ngIf="characters">
             <button class="btn_sorting-btn__height " (click)=" clickSortByHeight()">Height</button>
             <button class="btn_sorting-btn__mass " (click)="clickSortByMass()">Mass</button>
             <button class=" btn_sorting-btn__gender ">Gender</button>
